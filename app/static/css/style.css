@@ -1,7 +1,19 @@
 body,html {
-    padding-top: 90px;
+    padding-top: 20px;
+}
+
+label {
+    float:left;
 }
 
 .main-container {
     padding: 20px;
+}
+
+.people-per-household {
+    width:100px;
+}
+
+.results-container {
+    padding-top:20px;
 }
