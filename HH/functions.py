@@ -1,7 +1,9 @@
 # -*- coding: utf-8 -*-
 
-def islendingur():
-    bakgrunnsuppl = input_bakgrunnsuppl()
+def islendingur(bakgrunnsuppl = 0):
+    if bakgrunnsuppl == 0:
+        bakgrunnsuppl = input_bakgrunnsuppl()
+        
     tekjur_e_skatt, stadgreidsla, lifeyrisgreidsla, sereignarlifeyrisgr = stadgreidsla_func(bakgrunnsuppl)
     
     if bakgrunnsuppl['tekjur'][0] >= 1678001/12:
@@ -830,75 +832,3 @@ def print_dict(person_dict):
     print "Nettó tekjur í hverjum mánuði: {:,}".format(person_dict['pjeng_i_vasa'])
     print "======================"
     
-def vasapeningur(bakgrunnsuppl):
-    tekjur_e_skatt, stadgreidsla, lifeyrisgreidsla, sereignarlifeyrisgr = stadgreidsla_func(bakgrunnsuppl)
-    
-    if bakgrunnsuppl['tekjur'][0] >= 1678001/12:
-        utvarpsgjald = 16800/12
-    else: utvarpsgjald = 0
-    
-    if bakgrunnsuppl['ororkuhlutfall'] > 0:
-        samtals_ororka, ororka_e_skatt, ororka_stadgreidsla, ororka_skattgrunnur,\
-        ororkulifeyrir, aldurstengd_uppbot, tekjutrygging,\
-        heimilisuppbot, bensinsstyrkur, barnalifeyrir, medlag,\
-        foreldralaun, framfaersluppbot = ororka_func(bakgrunnsuppl)
-    else: 
-        samtals_ororka = ororka_e_skatt = ororka_stadgreidsla = ororka_skattgrunnur =\
-        ororkulifeyrir = aldurstengd_uppbot = tekjutrygging =\
-        heimilisuppbot = bensinsstyrkur = barnalifeyrir =\
-        medlag = foreldralaun = framfaersluppbot = 0
-        
-    if bakgrunnsuppl['aldur'] > 67:
-        samtals_elli, ellilifeyrir_e_skatt, ellilif_stadgreidsla, elli_skattgrunnur,\
-        ellilifeyrir, heimilisuppbot_elli, bensinsstyrkur_elli,\
-        barnalifeyrir_elli, medlag_elli, foreldralaun_elli = ellilifeyrir_func(bakgrunnsuppl)
-    else:
-        samtals_elli = ellilifeyrir_e_skatt = ellilif_stadgreidsla = elli_skattgrunnur =\
-        ellilifeyrir = heimilisuppbot_elli = bensinsstyrkur_elli =\
-        barnalifeyrir_elli = medlag_elli = foreldralaun_elli = 0
-    
-    husnaedisstudningur, husn_tekjuskerding, husn_eignaskerding =\
-        husnaedisstudningur_func(bakgrunnsuppl, ororka_skattgrunnur, elli_skattgrunnur)
-    if bakgrunnsuppl['hjuskaparstada'] != 1:
-        barnabaetur = barnabaetur_func(bakgrunnsuppl, ororka_skattgrunnur, elli_skattgrunnur)
-    else: barnabaetur = 0
-    
-    fjarmagnstekjur_e_skatt = bakgrunnsuppl['tekjur'][1] - (bakgrunnsuppl['tekjur'][1] * 0.2)
-    
-    netto = tekjur_e_skatt + fjarmagnstekjur_e_skatt + husnaedisstudningur +\
-    barnabaetur + ororka_e_skatt + ellilifeyrir_e_skatt - utvarpsgjald
-    
-    nidurstodur = {'tekjur': bakgrunnsuppl['tekjur'],
-                   'tekjur_e_skatt': tekjur_e_skatt,
-                   'fjarmagnstekjur_e_skatt': fjarmagnstekjur_e_skatt,
-                   'stadgreidsla': stadgreidsla,
-                   'lifeyrisgreidsla': (lifeyrisgreidsla+sereignarlifeyrisgr),
-                   'husnaedisstudningur': husnaedisstudningur,
-                   'husnaedisstudningur_eignaskerd': husn_eignaskerding,
-                   'husnaedisstudningur_tekjuskerd': husn_tekjuskerding,
-                   'barnabaetur': barnabaetur,
-                   'utvarpsgjald': utvarpsgjald,
-                   'pjeng_i_vasa': netto,
-                   'ororka_alls': samtals_ororka,
-                   'ororka_e_skatt': ororka_e_skatt,
-                   'ororka_stadgreidsla': ororka_stadgreidsla,
-                   'ororkulifeyrir': ororkulifeyrir,
-                   'aldurstengd_ororkuuppbot': aldurstengd_uppbot,
-                   'tekjutrygging_ororka': tekjutrygging,
-                   'heimilisuppbot_ororka': heimilisuppbot,
-                   'bensinsstyrkur_ororka': bensinsstyrkur,
-                   'barnalifeyrir_ororka': barnalifeyrir,
-                   'medlag_ororka': medlag,
-                   'foreldralaun_ororka': foreldralaun,
-                   'framfaersluppbot_ororka': framfaersluppbot,
-                   'ellilifeyrir': ellilifeyrir,
-                   'ellilifeyrir_e_skatt': ellilifeyrir_e_skatt,
-                   'ellilif_stadgreidsla': ellilif_stadgreidsla,
-                   'heimilisuppbot_ellifeyrir': heimilisuppbot_elli,
-                   'bensinstyrkur_elli': bensinsstyrkur_elli,
-                   'barnalifeyrir_elli': barnalifeyrir_elli,
-                   'medlag_elli': medlag_elli,
-                   'foreldralaun_elli': foreldralaun_elli,
-                   'samtals_elli': samtals_elli}
-    
-    return nidurstodur
