@@ -1,39 +1,100 @@
 # -*- coding: utf-8 -*-
 
-def islendingur(bakgrunnsuppl = 0):
+forsendur_dict = {'utvarpsgjald_threshold_m': 1678001/12,
+                 'utvarpsgjald_m': 16800/12,
+                 'eftirlaunaaldur': 67,
+                 'serstakar_tekjusk_nedri_m': [281083.0, 371755.0, 435226.0, 471495.0],
+                 'serstakar_tekjusk_efri_m': [351354, 464694, 544032, 589368],
+                 'serstakar_threshold_eign': 5126000,
+                 'serstakar_lagmarks_leiga': 40000,
+                 'serstakar_plus_venjulegar_hamark': 90000,
+                 'stadgr_threp_m': 834707,
+                 'stadgr_hlutfall_nedra': 0.3694,
+                 'stadgr_hlutfall_efra': 0.4624,
+                 'personuafslattur_m': 52907,
+                 'hamark_vaxtagjalda_y': [800000, 1000000, 1200000],
+                 'hamark_vaxtabota_y': [400000, 500000, 600000],
+                 'vaxtab_eignask_nedri': [4500000.0, 4500000.0, 7300000.0],
+                 'vaxtab_eignask_efri': [7200000.0, 7200000.0, 11680000.0],
+                 'vaxtab_tekjusk_hlutfall': 0.085,
+                 'vaxtab_hamarkshl_huslans': 0.07,
+                 'husnb_grunnur_m': [372000/12, 492000/12, 576000/12, 624000/12],
+                 'husnb_fritekjumark_m': [3373000/12, 4461064/12, 5222710/12, 5657936/12],
+                 'husnb_eignask_nedri': 6500000.0,
+                 'husnb_eignask_efri': 10400000.0,
+                 'husnb_tekjusk_hlutfall': 0.09,
+                 'husnb_hamarkshluti_husnkostn': 0.75,
+                 'barnab_skerdingarhlutfoll': [0.04, 0.06, 0.08],
+                 'barnab_skerdingarhl_vidbot': 0.04,
+                 'barnab_fjarh_fyrsta_barn_y': [342939, 205834],
+                 'barnab_fjarh_umfram_born_y': [351787, 245087],
+                 'barnab_fjarh_barn_undir_7_y': 122879,
+                 'barnab_tekjuskmork': [2700000, 5400000],
+                 'ororka_grunnur': 42852.0,
+                 'ororka_tekjusk_nedri': 214602.0,
+                 'ororka_tekjusk_efri': 386010.0,
+                 'ororka_fritekjumark_fjtekna_m': 98640.0/12,
+                 'ororka_fritekjumark_launa_m': 1315200/12,
+                 'ororka_fritekjumark_lifeyris_m': 328800/12,
+                 'ororka_tekjutr_m': 137226,
+                 'ororka_tekjutr_hamark_tekna_m': 386010,
+                 'ororka_heimilisuppbot_m': 39851,
+                 'barnalifeyrir/barn': 31679,
+                 'medlag/barn': 31679,
+                 'ororka_framfvidmid_ekkieinn': 227883,
+                 'ororka_framfvidmid_einn': 280000,
+                 'ororka_tekjutr_skerdingarhlutf_nedri': 0.3835,
+                 'ororka_tekjutr_skerdingarhlutf_efri': 0.1335,
+                 'ororka_heimilisuppbot_skerdingarhlutf': 0.114,
+                 'ororka_bensinstyrkur_m': 15839,
+                 'foreldralaun_2born_m': 9171,
+                 'foreldralaun_fleiri_born_m': 23844,
+                 'ellilif_lifeyrir_m': 228734,
+                 'ellilif_heimilisuppbot_m': 52316,
+                 'ellilif_bensinstyrkur_m': 15839,
+                 'ellilif_radstofunarfe_m': 68662,
+                 'ellilif_fritekjumork': 25000,
+                 'ellilif_lifeyrir_efri_mork_m': 533298,
+                 'ellilif_heimilisuppbot_efri_mork_m': 464597,
+                 'ellilif_lifeyrir_tekjusk_hlutf': 0.45,
+                 'ellilif_huppbot_tekjusk_hlutf': 0.119,
+                 'ellilif_haekkun_v_frestunar': 0.05
+                }
+
+def islendingur(forsendur = forsendur_dict, bakgrunnsuppl = 0):
     if bakgrunnsuppl == 0:
-        bakgrunnsuppl = input_bakgrunnsuppl()
+        bakgrunnsuppl = input_bakgrunnsuppl(forsendur)
         
-    tekjur_e_skatt, stadgreidsla, lifeyrisgreidsla, sereignarlifeyrisgr = stadgreidsla_func(bakgrunnsuppl)
+    tekjur_e_skatt, stadgreidsla, lifeyrisgreidsla, sereignarlifeyrisgr = stadgreidsla_func(forsendur, bakgrunnsuppl)
     
-    if bakgrunnsuppl['tekjur'][0] >= 1678001/12:
-        utvarpsgjald = 16800/12
+    if bakgrunnsuppl['tekjur'][0] >= forsendur['utvarpsgjald_threshold_m']:
+        utvarpsgjald = forsendur['utvarpsgjald_m']
     else: utvarpsgjald = 0
     
     if bakgrunnsuppl['ororkuhlutfall'] > 0:
         samtals_ororka, ororka_e_skatt, ororka_stadgreidsla, ororka_skattgrunnur,\
         ororkulifeyrir, aldurstengd_uppbot, tekjutrygging,\
         heimilisuppbot, bensinsstyrkur, barnalifeyrir, medlag,\
-        foreldralaun, framfaersluppbot = ororka_func(bakgrunnsuppl)
+        foreldralaun, framfaersluppbot = ororka_func(forsendur, bakgrunnsuppl)
     else: 
         samtals_ororka = ororka_e_skatt = ororka_stadgreidsla = ororka_skattgrunnur =\
         ororkulifeyrir = aldurstengd_uppbot = tekjutrygging =\
         heimilisuppbot = bensinsstyrkur = barnalifeyrir =\
         medlag = foreldralaun = framfaersluppbot = 0
         
-    if bakgrunnsuppl['aldur'] > 67:
+    if bakgrunnsuppl['aldur'] > forsendur['eftirlaunaaldur']:
         samtals_elli, ellilifeyrir_e_skatt, ellilif_stadgreidsla, elli_skattgrunnur,\
         ellilifeyrir, heimilisuppbot_elli, bensinsstyrkur_elli,\
-        barnalifeyrir_elli, medlag_elli, foreldralaun_elli = ellilifeyrir_func(bakgrunnsuppl)
+        barnalifeyrir_elli, medlag_elli, foreldralaun_elli = ellilifeyrir_func(forsendur, bakgrunnsuppl)
     else:
         samtals_elli = ellilifeyrir_e_skatt = ellilif_stadgreidsla = elli_skattgrunnur =\
         ellilifeyrir = heimilisuppbot_elli = bensinsstyrkur_elli =\
         barnalifeyrir_elli = medlag_elli = foreldralaun_elli = 0
     
     husnaedisstudningur, husn_tekjuskerding, husn_eignaskerding =\
-        husnaedisstudningur_func(bakgrunnsuppl, ororka_skattgrunnur, elli_skattgrunnur)
+        husnaedisstudningur_func(forsendur, bakgrunnsuppl, ororka_skattgrunnur, elli_skattgrunnur)
     if bakgrunnsuppl['hjuskaparstada'] != 1:
-        barnabaetur = barnabaetur_func(bakgrunnsuppl, ororka_skattgrunnur, elli_skattgrunnur)
+        barnabaetur = barnabaetur_func(forsendur, bakgrunnsuppl, ororka_skattgrunnur, elli_skattgrunnur)
     else: barnabaetur = 0
     
     fjarmagnstekjur_e_skatt = bakgrunnsuppl['tekjur'][1] - (bakgrunnsuppl['tekjur'][1] * 0.2)
@@ -76,40 +137,41 @@ def islendingur(bakgrunnsuppl = 0):
     
     return nidurstodur, bakgrunnsuppl
 
-def input_bakgrunnsuppl():
+def input_bakgrunnsuppl(forsendur):
+    aldur = -1
+    while aldur <= 0:
+        aldur = int(raw_input("Aldur?"))
+        
     # HJÚSKAPARSTAÐA
     # =======================================================
     hjuskaparstada = 4
     while hjuskaparstada >3 or hjuskaparstada <1:
         hjuskaparstada = int(raw_input('1: einhleypur, 2: einst. foreldri, 3: giftur/sambud '))
     
-    # BÚSETUFORM
-    # =======================================================
-    print "Hver er husnæðisstaða þín? Býrðu í eigin húsnæði, leiguhúsnæði/búsetu eða hvorugt?"
-    husn = 4
-    while husn >3 or husn <1:
-        husn = int(raw_input('1: eigin, 2: leigu, 3: hvorugt '))
-    
     # TEKJUR OG IÐGJALD
     # =======================================================
     laun_a_manudi = int(raw_input("Laun fyrir skatt: "))
     fjarmagnstekjur = int(raw_input("Fjarmagnstekjur: "))
     
-    print "	Iðgjald í lífeyrissjóð?"
-    idgjald = 3
-    while idgjald >2 or idgjald <1:
-        idgjald = int(raw_input('1: 0%, 2: 4% '))
-    if idgjald == 1:
-        idgjald = 0.0
-    elif idgjald == 2:
-        idgjald = 0.04
+    if laun_a_manudi != 0:
+        print "	Iðgjald í lífeyrissjóð?"
+        idgjald = 3
+        while idgjald >2 or idgjald <1:
+            idgjald = int(raw_input('1: 0%, 2: 4% '))
+        if idgjald == 1:
+            idgjald = 0.0
+        elif idgjald == 2:
+            idgjald = 0.04
             
-    print "	Iðgjald í séreign?"
-    sereignaridgjald = 5
-    while sereignaridgjald >4 or sereignaridgjald <0:
-        sereignaridgjald = int(raw_input('0: 0%, 1: 1%, 2: 2%, 3: 3%, 4: 4% '))
-    sereignaridgjald = sereignaridgjald / 100.0
-    
+        print "	Iðgjald í séreign?"
+        sereignaridgjald = 5
+        while sereignaridgjald >4 or sereignaridgjald <0:
+            sereignaridgjald = int(raw_input('0: 0%, 1: 1%, 2: 2%, 3: 3%, 4: 4% '))
+        sereignaridgjald = sereignaridgjald / 100.0
+       
+    else:
+        idgjald = sereignaridgjald = 0
+
     if hjuskaparstada == 3:
         laun_maka = int(raw_input("Laun maka fyrir skatt: "))
         fjarmagnstekjur_maka = int(raw_input("Fjarmagnstekjur maka: "))
@@ -127,8 +189,18 @@ def input_bakgrunnsuppl():
         print "Allar eignir að frádregnum öllum skuldum. Með eignum skal telja hlutabréf, innstæður og verðbréf: "
     eignir = int(raw_input())
     
+    # BÚSETUFORM
+    # =======================================================
+    print "Hver er husnæðisstaða þín? Býrðu í eigin húsnæði, leiguhúsnæði/búsetu eða hvorugt?"
+    husn = 4
+    while husn >3 or husn <1:
+        husn = int(raw_input('1: eigin, 2: leigu/busetu, 3: hvorugt '))
+    
     # HÚSNÆÐISBREYTUR
     # =======================================================
+    serstakar_tekjumork = forsendur['serstakar_tekjusk_efri_m']
+    serstakar_eignamork = forsendur['serstakar_threshold_eign']
+    
     if husn == 1:   
         print 'Eftirstöðvar í árslok af lánum sem tekin hafa verið til öflunar íbúðarhúsnæðis til eigin nota: '
         eftirstodvar = int(raw_input())
@@ -138,24 +210,36 @@ def input_bakgrunnsuppl():
         eftirstodvar = 0
         vaxtagjold = 0
     if husn == 2:
+        husnaediskostnadur = int(raw_input('manadarlegur husnaediskostnadur: '))
         fjoldi_heimilismanna = int(raw_input("fjoldi heimilismanna ad ther medtoldum: "))
         if fjoldi_heimilismanna > 4:
             fjoldi_heimilismanna = 4
+            
         if fjoldi_heimilismanna == 1:
-            heimilistekjur = (tekju_uppl[0] + tekju_uppl[1])
+            heimilistekjur = 0
             heimiliseignir = eignir
         elif fjoldi_heimilismanna == 2 and hjuskaparstada == 3:
-            heimilistekjur = sum(tekju_uppl)
+            heimilistekjur = 0
             heimiliseignir = eignir
         else:
-            heimilistekjur = int(raw_input('samanlagdar skattskyldar tekjur fyrir skatt allra heimilismanna: '))
+            heimilistekjur = int(raw_input('samanlagdar skattskyldar tekjur annarra heimilismanna en þín: '))
             heimiliseignir = int(raw_input('samanlagdar eignir allra heimilismanna: '))
-        husnaediskostnadur = int(raw_input('manadarlegur husnaediskostnadur: '))
+            
+        if (heimilistekjur + sum(tekju_uppl)) < (serstakar_tekjumork[fjoldi_heimilismanna-1]) and\
+            heimiliseignir < serstakar_eignamork and\
+            husnaediskostnadur > forsendur['serstakar_lagmarks_leiga']:
+                serstakar = 3
+                while serstakar > 2 or serstakar < 1:
+                    serstakar = int(raw_input("Attu rett a serstokum husaleigubotum? 1: Ja. 2: Nei. "))
+        else:
+            serstakar = 0
+        
     else: 
         fjoldi_heimilismanna = 0
         heimilistekjur = 0
         heimiliseignir = 0
         husnaediskostnadur = 0
+        serstakar = 0
         
     # BÖRN
     # =======================================================
@@ -175,12 +259,8 @@ def input_bakgrunnsuppl():
         fj_barna = fj_barna_undir_7 = 0
         
     # ÖRORKA
-    # =======================================================
-    aldur = -1
-    while aldur <= 0:
-        aldur = int(raw_input("Aldur?"))
-    
-    if aldur < 67:
+    # =======================================================   
+    if aldur < forsendur['eftirlaunaaldur']:
         print "Hlutfall örorku?"
         ororkuhlutfall = int(raw_input("Hlutfall i prosentum: "))
         if ororkuhlutfall > 0:
@@ -211,7 +291,7 @@ def input_bakgrunnsuppl():
     
     # ELLILÍFEYRIR
     # =======================================================
-    if aldur >= 67:
+    if aldur >= forsendur['eftirlaunaaldur']:
         print "Býrðu einn?"
         byr_einn = 2
         while byr_einn <0 or byr_einn >1:
@@ -249,17 +329,18 @@ def input_bakgrunnsuppl():
                     'hreyfihomlun': hreyfihomlun,
                     'medlag_fj': medlag_fj,
                     'aldur': aldur,
-                    'frestun_ellilifeyris': frestun_ellilif
+                    'frestun_ellilifeyris': frestun_ellilif,
+                    'serstakar': serstakar
                     }
     
     return bakgrunnsuppl
 
-def stadgreidsla_func(info):
+def stadgreidsla_func(forsendur, info):
     
-    skattthrep = 834707
-    skatthlutfall_nedra = 0.3694
-    skatthlutfall_efra = 0.4624
-    personuafsl = 52907
+    skattthrep = forsendur['stadgr_threp_m']
+    skatthlutfall_nedra = forsendur['stadgr_hlutfall_nedra']
+    skatthlutfall_efra = forsendur['stadgr_hlutfall_efra']
+    personuafsl = forsendur['personuafslattur_m']
     
     lifeyrir = (info['tekjur'][0] * info['idgjald'])
     serlifeyrir = (info['tekjur'][0] * info['sereignaridgjald'])
@@ -285,12 +366,12 @@ def stadgreidsla_func(info):
     
     return laun_e_skatt, stadgreidsla_alls, lifeyrir, serlifeyrir
 
-def stadgreidsla_small_func(stofn):
+def stadgreidsla_small_func(forsendur, stofn):
     
-    skattthrep = 834707
-    skatthlutfall_nedra = 0.3694
-    skatthlutfall_efra = 0.4624
-    personuafsl = 52907
+    skattthrep = forsendur['stadgr_threp_m']
+    skatthlutfall_nedra = forsendur['stadgr_hlutfall_nedra']
+    skatthlutfall_efra = forsendur['stadgr_hlutfall_efra']
+    personuafsl = forsendur['personuafslattur_m']
     
     if stofn <= skattthrep:
         skattstofn_1 = stofn
@@ -309,39 +390,43 @@ def stadgreidsla_small_func(stofn):
     
     return laun_e_skatt, stadgreidsla_alls
 
-def husnaedisstudningur_func(info, ororka, ellilif):
+def husnaedisstudningur_func(forsendur, info, ororka, ellilif):
 
     if info['busetuform'] == 1:      
-        studningur = vaxtabaetur_func(info, ororka, ellilif)
+        studningur, tekjuskerding, eignaskerding = vaxtabaetur_func(forsendur, info, ororka, ellilif)
         
     elif info['busetuform'] == 2:
-        studningur = husnaedisbaetur_func(info, ororka, ellilif)
+        studningur, tekjuskerding, eignaskerding, heimilistekjur = husnaedisbaetur_func(forsendur, info, ororka, ellilif)
+        if info['serstakar'] == 1:
+            serstakar = serstakar_func(forsendur, info, ororka, ellilif, studningur)
+            studningur += serstakar
         
     else:
         studningur = 0
     
-    return studningur
+    return studningur, tekjuskerding, eignaskerding
 
-def vaxtabaetur_func(info, ororka, ellilif):
+def vaxtabaetur_func(forsendur, info, ororka, ellilif):
     
-    hamark_vaxtagjalda = [800000, 1000000, 1200000] #fyrir: [einstakling, einstætt foreldri, hjón]
-    hamark_bota = [400000, 500000, 600000] #fyrir: [einstakling, einstætt foreldri, hjón]
+    hamark_vaxtagjalda = forsendur['hamark_vaxtagjalda_y'] #fyrir: [einstakling, einstætt foreldri, hjón]
+    hamark_bota = forsendur['hamark_vaxtabota_y'] #fyrir: [einstakling, einstætt foreldri, hjón]
     tekjur_yearly = [info['tekjur'][0]*12,\
                      info['tekjur'][1]*12,\
                      info['tekjur'][2]*12,\
                      info['tekjur'][3]*12]
     ororka_yearly = 12*ororka
     ellilif_yearly = 12*ellilif
+    tekjur = sum(tekjur_yearly) + ororka_yearly + ellilif_yearly
     
-    eignaskerdingarmork_nedri = [4500000.0, 4500000.0, 7300000.0] #fyrir: [einstakling, einstætt foreldri, hjón]
-    eignaskerdingarmork_efri = [7200000.0, 7200000.0, 11680000.0] #fyrir: [einstakling, einstætt foreldri, hjón]
+    eignaskerdingarmork_nedri = forsendur['vaxtab_eignask_nedri'] #fyrir: [einstakling, einstætt foreldri, hjón]
+    eignaskerdingarmork_efri = forsendur['vaxtab_eignask_efri'] #fyrir: [einstakling, einstætt foreldri, hjón]
 
     stofn_list = [hamark_vaxtagjalda[info['hjuskaparstada']-1], 
-                  0.07*info['husnaedislan'], 
+                  forsendur['vaxtab_hamarkshl_huslans']*info['husnaedislan'], 
                   info['vaxtagjold']]
     stofn =  min(float(s) for s in stofn_list)
     
-    tekjuskerding = (0.085 * (sum(tekjur_yearly) + ororka_yearly + ellilif_yearly))
+    tekjuskerding = forsendur['vaxtab_tekjusk_hlutfall'] * tekjur
     baetur = stofn - tekjuskerding
     if baetur < 0:
         baetur = 0
@@ -380,26 +465,23 @@ def vaxtabaetur_func(info, ororka, ellilif):
             
     return baetur, tekjuskerding, eignaskerding
 
-def husnaedisbaetur_func(info, ororka, ellilif):
+def husnaedisbaetur_func(forsendur, info, ororka, ellilif):
 
-    grunnfjarhaedir = [372000/12, 492000/12, 576000/12, 624000/12]
-    fritekjumark = [3373000/12, 4461064/12, 5222710/12, 5657936/12]
-    eignaskerdingarmork_nedri = 6500000.0
-    eignaskerdingarmork_efri = 10400000.0
+    tekjur = info['heimilistekjur'] + sum(info['tekjur']) + ororka + ellilif
+    
+    grunnfjarhaedir = forsendur['husnb_grunnur_m']
+    fritekjumark = forsendur['husnb_fritekjumark_m']
+    eignaskerdingarmork_nedri = forsendur['husnb_eignask_nedri']
+    eignaskerdingarmork_efri = forsendur['husnb_eignask_efri']
     
     stofn = grunnfjarhaedir[(info['fjoldi_heimilismanna']-1)]
     heimilistekjur = info['heimilistekjur']
-    
-    if info['fjoldi_heimilismanna'] == 1:
-        heimilistekjur += (ororka + ellilif)
-    elif info['fjoldi_heimilismanna'] == 2 and info['hjuskaparstada'] == 3:
-        heimilistekjur += (ororka + ellilif)
-    
+
     if heimilistekjur <= fritekjumark[info['fjoldi_heimilismanna']-1]:
         baetur = stofn
         tekjuskerding = 0
     else:
-        tekjuskerding = 0.09 *\
+        tekjuskerding = forsendur['husnb_tekjusk_hlutfall'] *\
         (heimilistekjur - fritekjumark[info['fjoldi_heimilismanna']-1])
         baetur = stofn - tekjuskerding
     
@@ -414,8 +496,10 @@ def husnaedisbaetur_func(info, ororka, ellilif):
     else:
         eignaskerding = 0
     
-    if baetur > 0.75*info['husnaediskostnadur']:
-        baetur = 0.75*info['husnaediskostnadur']
+    if baetur > forsendur['husnb_hamarkshluti_husnkostn']*\
+    info['husnaediskostnadur']:
+        baetur = forsendur['husnb_hamarkshluti_husnkostn']*\
+        info['husnaediskostnadur']
     if baetur < 0:
         baetur = 0
     if tekjuskerding < 0:
@@ -423,9 +507,34 @@ def husnaedisbaetur_func(info, ororka, ellilif):
     if eignaskerding < 0:
         eignaskerding = 0
             
-    return baetur, tekjuskerding, eignaskerding
+    return baetur, tekjuskerding, eignaskerding, heimilistekjur
 
-def barnabaetur_func(info, ororka, ellilif):
+def serstakar_func(forsendur, info, ororka, ellilif, studningur):
+    upphaf_skerdingar = forsendur['serstakar_tekjusk_nedri_m']
+    lok_skerdingar = forsendur['serstakar_tekjusk_efri_m']
+    serstakar_eignamork = forsendur['serstakar_threshold_eign']
+    
+    serstakar = studningur
+    if info['heimiliseignir'] > serstakar_eignamork:
+        serstakar = 0
+    
+    tekjur = info['heimilistekjur'] + sum(info['tekjur']) + ororka + ellilif
+    
+    tekjuskerding =\
+        serstakar * ((tekjur - upphaf_skerdingar[info['fjoldi_heimilismanna']-1]) /
+         (lok_skerdingar[info['fjoldi_heimilismanna']-1] - upphaf_skerdingar[info['fjoldi_heimilismanna']-1]))
+    print tekjuskerding
+    serstakar -= tekjuskerding
+    
+    if serstakar < 0:
+        serstakar = 0
+    
+    if studningur + serstakar > forsendur['serstakar_plus_venjulegar_hamark']:
+        serstakar = forsendur['serstakar_plus_venjulegar_hamark'] - studningur
+        
+    return serstakar, tekjuskerding
+
+def barnabaetur_func(forsendur, info, ororka, ellilif):
     tekjur_yearly = [info['tekjur'][0]*12, 
                      info['tekjur'][1]*12, 
                      info['tekjur'][2]*12, 
@@ -437,16 +546,16 @@ def barnabaetur_func(info, ororka, ellilif):
     fj_barna_undir_7 = info['fjoldi_barna_undir_7']
     
     # SKERÐINGARHLUFÖLL
-    skerdingarhlutfoll = [0.04, 0.06, 0.08] # [1 barn, 2 börn, 3 börn eða fleiri]
-    skerdingarhlutf_vidbot = 0.04
+    skerdingarhlutfoll = forsendur['barnab_skerdingarhlutfoll'] # [1 barn, 2 börn, 3 börn eða fleiri]
+    skerdingarhlutf_vidbot = forsendur['barnab_skerdingarhl_vidbot']
     
     # FJÁRHÆÐIR 2017
-    fjarhaedir_fyrsta_barn = [342939, 205834] # [einstætt foreldri, hjón/sambúðarfólk]
-    fjarhaedir_umfram_born = [351787, 245087] # [einstætt foreldri, hjón/sambúðarfólk]
-    vidbotarfjarhaed_hvert_barn_undir_7 = 122879
+    fjarhaedir_fyrsta_barn = forsendur['barnab_fjarh_fyrsta_barn_y'] # [einstætt foreldri, hjón/sambúðarfólk]
+    fjarhaedir_umfram_born = forsendur['barnab_fjarh_umfram_born_y'] # [einstætt foreldri, hjón/sambúðarfólk]
+    vidbotarfjarhaed_hvert_barn_undir_7 = forsendur['barnab_fjarh_barn_undir_7_y']
     
     # SKERÐINGARMÖRK
-    skerdingarmork = [2700000, 5400000] # [einstætt foreldri, hjón/sambúðarfólk]
+    skerdingarmork = forsendur['barnab_tekjuskmork'] # [einstætt foreldri, hjón/sambúðarfólk]
     
     # ÚTREIKNINGUR ÓSKERTRAR BÓTAFJÁRHÆÐAR
     stofn_til_skerdingar = (sum(tekjur_yearly) + ororka_yearly + ellilif_yearly)\
@@ -476,7 +585,7 @@ def barnabaetur_func(info, ororka, ellilif):
     else:
         return baetur/24 #bætur deilast jafnt milli hjóna
 
-def ororka_func(info):
+def ororka_func(forsendur, info):
     """
     Til einfoldunar er gert rad fyrir ad:
         busetuhlutfall = 100%
@@ -489,25 +598,25 @@ def ororka_func(info):
         erlendur grunnlifeyrir = 0
         n.b. aðrar tekjur innihalda ekki fjármagnstekjur
     """
-    grunnlifeyrir = 42852.0
-    nedri_skerdingarmork_lifeyris = 214602.0
-    efri_skerdingarmork_lifeyris = 386010.0
-    fritekjumark_fjarmagstekna = 98640.0/12
-    fritekjumark_launa = 1315200/12
-    fritekjumark_lifeyris = 328800/12
-    tekjutrygging = 137226
-    tekjutrygging_hamark_tekna = 386010
-    heimilisuppbot = 39851
+    grunnlifeyrir = forsendur['ororka_grunnur']
+    nedri_skerdingarmork_lifeyris = forsendur['ororka_tekjusk_nedri']
+    efri_skerdingarmork_lifeyris = forsendur['ororka_tekjusk_efri']
+    fritekjumark_fjarmagstekna = forsendur['ororka_fritekjumark_fjtekna_m']
+    fritekjumark_launa = forsendur['ororka_fritekjumark_launa_m']
+    fritekjumark_lifeyris = forsendur['ororka_fritekjumark_lifeyris_m']
+    tekjutrygging = forsendur['ororka_tekjutr_m']
+    tekjutrygging_hamark_tekna = forsendur['ororka_tekjutr_hamark_tekna_m']
+    heimilisuppbot = forsendur['ororka_heimilisuppbot_m']
     laun = info['tekjur'][0]
     if info['hjuskaparstada'] == 3:
         fjt =(info['tekjur'][1] + info['tekjur'][3])/2
     else:
         fjt = info['tekjur'][1]
-    liftek = info['tekjur'][2] #ATHUGA BREYTA
-    barnalifeyrir_per_barn = 31679
-    medlag_per_barn = 31679
-    framfaersluvidmid_ekki_einn = 227883
-    framfaersluvidmid_einn = 280000
+    liftek = 0 #ATHUGA BREYTA
+    barnalifeyrir_per_barn = forsendur['barnalifeyrir/barn']
+    medlag_per_barn = forsendur['medlag/barn']
+    framfaersluvidmid_ekki_einn = forsendur['ororka_framfvidmid_ekkieinn']
+    framfaersluvidmid_einn = forsendur['ororka_framfvidmid_einn']
     
     ##### TEKJUSKERDINGAR ######
     launatekjur_til_skerdingar =\
@@ -566,8 +675,10 @@ def ororka_func(info):
     if launatekjur_til_skerdingar < nedri_skerdingarmork_lifeyris:
         skerding_laun = 0.3835*(launatekjur_til_skerdingar - fritekjumark_launa)
     else:
-        nedri = 0.3835*(nedri_skerdingarmork_lifeyris - fritekjumark_launa)
-        efri = 0.1335*(launatekjur_til_skerdingar - nedri_skerdingarmork_lifeyris)
+        nedri = forsendur['ororka_tekjutr_skerdingarhlutf_nedri'] *\
+        (nedri_skerdingarmork_lifeyris - fritekjumark_launa)
+        efri = forsendur['ororka_tekjutr_skerdingarhlutf_efri'] *\
+        (launatekjur_til_skerdingar - nedri_skerdingarmork_lifeyris)
         skerding_laun = efri + nedri
     
     if skerding_laun < 0:
@@ -575,20 +686,27 @@ def ororka_func(info):
     
     if laun == 0:
         if fjt < (nedri_skerdingarmork_lifeyris + fritekjumark_fjarmagstekna):
-            skerding_fjt = 0.3835 * (fjt - fritekjumark_fjarmagstekna)
+            skerding_fjt = forsendur['ororka_tekjutr_skerdingarhlutf_nedri'] *\
+            (fjt - fritekjumark_fjarmagstekna)
         else:
-            nedri = 0.3835 * (nedri_skerdingarmork_lifeyris)
-            efri = 0.1335*(fjt - (nedri_skerdingarmork_lifeyris+fritekjumark_fjarmagstekna))
+            nedri = forsendur['ororka_tekjutr_skerdingarhlutf_nedri'] *\
+            (nedri_skerdingarmork_lifeyris)
+            efri = forsendur['ororka_tekjutr_skerdingarhlutf_efri'] *\
+            (fjt - (nedri_skerdingarmork_lifeyris+fritekjumark_fjarmagstekna))
             skerding_fjt = efri + nedri
     elif laun < nedri_skerdingarmork_lifeyris:    
         if fjt < (nedri_skerdingarmork_lifeyris - laun):
-            skerding_fjt = 0.3835*(fjt - fritekjumark_fjarmagstekna)
+            skerding_fjt = forsendur['ororka_tekjutr_skerdingarhlutf_nedri'] *\
+            (fjt - fritekjumark_fjarmagstekna)
         else:
-            nedri = 0.3835 * (nedri_skerdingarmork_lifeyris - laun)
-            efri = 0.1335 * (fjt - (nedri_skerdingarmork_lifeyris - laun + fritekjumark_fjarmagstekna))
+            nedri = forsendur['ororka_tekjutr_skerdingarhlutf_nedri'] *\
+            (nedri_skerdingarmork_lifeyris - laun)
+            efri = forsendur['ororka_tekjutr_skerdingarhlutf_efri'] *\
+            (fjt - (nedri_skerdingarmork_lifeyris - laun + fritekjumark_fjarmagstekna))
             skerding_fjt = nedri + efri
     else:
-        skerding_fjt = 0.1335 * (fjt - fritekjumark_fjarmagstekna)
+        skerding_fjt = forsendur['ororka_tekjutr_skerdingarhlutf_efri'] *\
+        (fjt - fritekjumark_fjarmagstekna)
         
     if skerding_fjt < 0:
         skerding_fjt = 0
@@ -616,7 +734,7 @@ def ororka_func(info):
         
     ##### HREYFIHÖMLUNARMAT #####
     if info['hreyfihomlun'] == 1 or info['hreyfihomlun'] == 2:
-        bensinsstyrkur = 15839
+        bensinsstyrkur = forsendur['ororka_tekjutr_skerdingarhlutf_efri']
     else:
         bensinsstyrkur = 0
         
@@ -631,9 +749,9 @@ def ororka_func(info):
         if info['fjoldi_barna'] < 2:
             foreldralaun = 0
         if info['fjoldi_barna'] == 2:
-            foreldralaun = 9171
+            foreldralaun = forsendur['foreldralaun_2born_m']
         elif info['fjoldi_barna'] > 2:
-            foreldralaun = 23844
+            foreldralaun = forsendur['foreldralaun_fleiri_born_m']
     else:
         foreldralaun = 0
     
@@ -659,7 +777,7 @@ def ororka_func(info):
     
     skattgrunnur = samtals - barnalifeyrir - medlag
     
-    samtals_e_skatt, stadgreidsla = stadgreidsla_small_func(skattgrunnur)
+    samtals_e_skatt, stadgreidsla = stadgreidsla_small_func(forsendur, skattgrunnur)
     
     
     """print "ororkulifeyrir: %d" %ororkulifeyrir
@@ -681,21 +799,21 @@ def ororka_func(info):
             aldurstengd_uppbot, tekjutrygging, heimilisuppbot,\
             bensinsstyrkur, barnalifeyrir, medlag, foreldralaun, framfaersluppbot
         
-def ellilifeyrir_func(info):
+def ellilifeyrir_func(forsendur, info):
     '''
     midast vid full rettindi til ellilifeyris (40 ara buseta frá 16-67 ára aldri)
     '''
     
-    ellilifeyrir = 228734
-    heimilisuppbot = 52316
-    uppbot_v_bils = 15839
-    radstofunarfe = 68662
-    fritekjumork = 25000
-    efri_mork_lifeyrir = 533298
-    efri_mork_huppbot = 464597
+    ellilifeyrir = forsendur['ellilif_lifeyrir_m']
+    heimilisuppbot = forsendur['ellilif_heimilisuppbot_m']
+    uppbot_v_bils = forsendur['ellilif_bensinstyrkur_m']
+    radstofunarfe = forsendur['ellilif_radstofunarfe_m']
+    fritekjumork = forsendur['ellilif_fritekjumork']
+    efri_mork_lifeyrir = forsendur['ellilif_lifeyrir_efri_mork_m']
+    efri_mork_huppbot = forsendur['ellilif_heimilisuppbot_efri_mork_m']
     laun = info['tekjur'][0]
-    barnalifeyrir_per_barn = 31679
-    medlag_per_barn = 31679
+    barnalifeyrir_per_barn = forsendur['barnalifeyrir/barn']
+    medlag_per_barn = forsendur['medlag/barn']
     
     ##### ELLILÍFEYRIR #####
     launatekjur_til_skerdingar =\
@@ -704,7 +822,8 @@ def ellilifeyrir_func(info):
         launatekjur_til_skerdingar + info['tekjur'][1]#+lifeyrisgreidslur
         
     if tekjur_til_skerdingar > fritekjumork:
-        skerding = 0.45*(tekjur_til_skerdingar - fritekjumork)
+        skerding = forsendur['ellilif_lifeyrir_tekjusk_hlutf'] *\
+        (tekjur_til_skerdingar - fritekjumork)
         ellilifeyrir -= skerding
         if ellilifeyrir < 0:
             ellilifeyrir = 0
@@ -712,7 +831,8 @@ def ellilifeyrir_func(info):
     ##### HEIMILISUPPBÓT #####
     if info['byr_einn'] == 0:
         if tekjur_til_skerdingar > fritekjumork:
-            skerding = 0.119*(tekjur_til_skerdingar - fritekjumork)
+            skerding = forsendur['ellilif_huppbot_tekjusk_hlutf'] *\
+            (tekjur_til_skerdingar - fritekjumork)
             heimilisuppbot -= skerding
             if heimilisuppbot < 0:
                 heimilisuppbot = 0
@@ -721,7 +841,7 @@ def ellilifeyrir_func(info):
     
     ##### HREYFIHÖMLUNARMAT #####
     if info['hreyfihomlun'] == 1 or info['hreyfihomlun'] == 2:
-        bensinsstyrkur = 15839
+        bensinsstyrkur = uppbot_v_bils
     else:
         bensinsstyrkur = 0
         
@@ -736,23 +856,25 @@ def ellilifeyrir_func(info):
         if info['fjoldi_barna'] < 2:
             foreldralaun = 0
         if info['fjoldi_barna'] == 2:
-            foreldralaun = 9171
+            foreldralaun = forsendur['foreldralaun_2born_m']
         elif info['fjoldi_barna'] > 2:
-            foreldralaun = 23844
+            foreldralaun = forsendur['foreldralaun_fleiri_born_m']
     else:
         foreldralaun = 0
         
     ##### FRESTUN/FLÝTING ELLILIFEYRIS #####
     if info['frestun_ellilifeyris'] > 0:
-        ellilifeyrir += ellilifeyrir * (info['frestun_ellilifeyris'] * 0.005)
-        heimilisuppbot += heimilisuppbot * (info['frestun_ellilifeyris'] * 0.005)
+        ellilifeyrir += ellilifeyrir * (info['frestun_ellilifeyris'] * \
+                                       forsendur['ellilif_haekkun_v_frestunar'])
+        heimilisuppbot += heimilisuppbot * (info['frestun_ellilifeyris'] * \
+                                           forsendur['ellilif_haekkun_v_frestunar'])
         
         # bæta inn flýtingu? þá þarf að opna möguleikann á ellilífeyri 2 árum fyrr
     samtals = ellilifeyrir + heimilisuppbot + bensinsstyrkur + barnalifeyrir + medlag + foreldralaun
     
     skattgrunnur = samtals - barnalifeyrir - medlag
     
-    samtals_e_skatt, stadgreidsla = stadgreidsla_small_func(skattgrunnur)
+    samtals_e_skatt, stadgreidsla = stadgreidsla_small_func(forsendur, skattgrunnur)
     
     return samtals, samtals_e_skatt, stadgreidsla, skattgrunnur,\
         ellilifeyrir, heimilisuppbot, bensinsstyrkur,\
@@ -831,4 +953,3 @@ def print_dict(person_dict):
     print "====NIÐURSTAÐA========"
     print "Nettó tekjur í hverjum mánuði: {:,}".format(person_dict['pjeng_i_vasa'])
     print "======================"
-    
