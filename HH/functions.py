@@ -61,7 +61,7 @@ forsendur_dict = {'utvarpsgjald_threshold_m': 1678001/12,
                  'ellilif_haekkun_v_frestunar': 0.05
                 }
 
-def islendingur(forsendur = forsendur_dict, bakgrunnsuppl = 0):
+def islendingur(bakgrunnsuppl = 0, forsendur = forsendur_dict):
     if bakgrunnsuppl == 0:
         bakgrunnsuppl = input_bakgrunnsuppl(forsendur)
         
@@ -204,8 +204,11 @@ def input_bakgrunnsuppl(forsendur):
     if husn == 1:   
         print 'Eftirstöðvar í árslok af lánum sem tekin hafa verið til öflunar íbúðarhúsnæðis til eigin nota: '
         eftirstodvar = int(raw_input())
-        print "Vextir og verðbætur af íbúðarlánum á ársgrundvelli, þ.m.t. dráttarvextir og lántökukostnaður: "
-        vaxtagjold = int(raw_input())
+        if eftirstodvar > 0:
+            print "Vextir og verðbætur af íbúðarlánum á ársgrundvelli, þ.m.t. dráttarvextir og lántökukostnaður: "
+            vaxtagjold = int(raw_input())
+        else:
+            vaxtagjold = 0
     else:
         eftirstodvar = 0
         vaxtagjold = 0
@@ -221,9 +224,12 @@ def input_bakgrunnsuppl(forsendur):
         elif fjoldi_heimilismanna == 2 and hjuskaparstada == 3:
             heimilistekjur = 0
             heimiliseignir = eignir
+        elif hjuskaparstada == 3:
+            heimilistekjur = int(raw_input('samanlagdar skattskyldar tekjur annarra heimilismanna en þín og maka: '))
+            heimiliseignir = int(raw_input('samanlagdar eignir annarra heimilismanna en þín og maka: '))
         else:
             heimilistekjur = int(raw_input('samanlagdar skattskyldar tekjur annarra heimilismanna en þín: '))
-            heimiliseignir = int(raw_input('samanlagdar eignir allra heimilismanna: '))
+            heimiliseignir = int(raw_input('samanlagdar eignir annarra heimilismanna en þín: '))
             
         if (heimilistekjur + sum(tekju_uppl)) < (serstakar_tekjumork[fjoldi_heimilismanna-1]) and\
             heimiliseignir < serstakar_eignamork and\
