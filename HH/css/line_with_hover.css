@@ -1,0 +1,38 @@
+
+/* Based on http://bl.ocks.org/d3noob/b3ff6ae1c120eea654b5 */
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+body {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+.x.axis path {
+  display: none;
+}
+
+
+.overlay {
+  fill: none;
+  pointer-events: all;
+}
+
+.focus circle {
+  fill: none;
+  stroke: steelblue;
+}
+
+.hover-line {
+  stroke: steelblue;
+  stroke-width: 2px;
+  stroke-dasharray: 3,3;
+}
