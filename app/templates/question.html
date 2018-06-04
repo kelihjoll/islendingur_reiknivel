@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% block body %}
+{% include "nav.html" %}
+<div class="main-container container">
+    {%include "loader.html"%}
+</div>
+{% endblock %}
+{% block url_specific_scripts %}
+<script type='text/javascript' src="{{ url_for('static', filename='javascripts/question.js') }}"></script>
+{% endblock %}

@@ -1,0 +1,37 @@
+<div class="bot-container">
+    <div class="bot-image-container">
+        <image height='170' src="{{ url_for('static', filename='images/jonas.png') }}" class="img-circle bot-image">
+    </div>
+</div>
+<div class="question-container">
+   <h4 class='question'>{{ question.question }}</h4>
+</div>
+{%if question.type == "opening_question" %}
+  <div class="continue-btn-container">    
+    <button class="btn btn-info btn-lg btn-block btn-continue">Byrja <span class='fa fa-chevron-right'></span></button>
+</div>
+{% elif question.type == "multiple_choice" %}
+    <div class="multiple-choice-container">          
+        {% for choice in question.choices %}
+          <div class="choice-container">
+              <div class="circle-container">
+                  <div class="circle"></div>
+              </div>
+              <div class="choice">
+                  <p>{{ choice }}</p>
+              </div>
+          </div>
+        {% endfor %}
+    </div>
+    {% include "minitemplates/continue_btn.html" %}
+{% elif question.type == "input-money" %}
+    <div class="input-container">
+        <input type="text" class="form-control input-lg format-money" placeholder={{ question.placeholder }}>
+    </div>
+    {% include "minitemplates/continue_btn.html" %}
+{% elif question.type == "input" %}
+    <div class="input-container">
+        <input type="text" class="form-control input-lg" placeholder={{ question.placeholder }}>
+    </div>
+    {% include "minitemplates/continue_btn.html" %}
+{% endif %}

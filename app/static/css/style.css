@@ -1,0 +1,149 @@
+body,html {
+    padding-top: 20px;
+}
+
+label {
+    float:left;
+}
+
+.main-container {
+    padding: 20px;
+}
+
+.header-container {
+    text-align: center;
+    font-family: "Work Sans", sans-serif;
+}
+
+.people-per-household {
+    width:100px;
+}
+
+.results-container {
+    padding-top:20px;
+}
+
+.bot-image-container {
+    border-bottom:1px solid whitesmoke;
+    padding:20px;
+}
+
+.bot-image {
+    display:block;
+    margin:auto;
+}
+
+/*
+    Question CSS
+ */
+
+.choice-container{
+    padding:10px;
+    margin:10px auto;
+    width:300px;
+    border:1px solid whitesmoke;
+    overflow:auto;
+    cursor: pointer;
+}
+
+.circle-container {
+    width:14%;
+    position: relative;
+    float:left;
+    border-radius:15px;
+
+}
+
+.circle {
+    border: 1px solid rgba(0,0,0,0.1);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: 4px;
+    left: 0%;
+    border-radius: 50%;
+}
+
+
+.choice {
+    width:86%;
+    font-family: "Work Sans", sans-serif;   
+    float:right;
+    padding-left:5px;
+    font-size:20px;
+}
+
+.choice p {
+    display: table-cell;
+    height:38px;
+    vertical-align: middle;
+}
+
+.chosen {
+    background-color: #25A2B6;
+    width: 18px;
+    height: 18px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    border-radius: 50%;
+}
+
+.question-container{
+    text-align: center;
+    font-family: "Work Sans", sans-serif;   
+}
+
+.question {
+    line-height:32px;
+}
+
+.continue-btn-container {
+    text-align: center;
+    width:200px;
+    padding: 10px;
+    margin:auto;
+}
+
+.continue-btn {
+    margin:auto;
+}
+
+.input-container {
+    width: 400px;
+    margin:auto;
+}
+
+/*
+    Loader CSS
+ */
+
+.loader-container {
+    width: 100%;
+    margin-top:100px;
+    text-align: center;
+}
+
+.typewriter-text {
+    margin-top:30px;
+    font-family: 'Cutive Mono', monospace;
+    font-size: 24px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.0;
+  }
+}
+  
+
+@-webkit-keyframes blink {
+  50% {
+    opacity: 0.0
+  }
+}
+    
+.blink {
+    animation: blink 1s step-start 0s infinite;
+    -webkit-animation: blink 1s step-start 0s infinite;
+}

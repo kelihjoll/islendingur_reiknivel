@@ -1,0 +1,18 @@
+<!doctype html>
+<title>Flaskr</title>
+<head>
+    <link rel="shortcut icon" href="">
+    <link rel=stylesheet type=text/css href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel='stylesheet', href="https://fonts.googleapis.com/css?family=Dancing+Script:700|Work+Sans:300|Open+Sans:500|Cutive+Mono">
+    <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    
+    <div class='page container'>
+      {% block body %}{% endblock %}
+    </div>
+</body>
+  <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script type="text/javascript" src="https://use.fontawesome.com/eee4cae7c9.js"></script>  
+  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  {% block url_specific_scripts %}{% endblock %}
