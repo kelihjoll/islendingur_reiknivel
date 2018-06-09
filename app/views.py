@@ -221,6 +221,12 @@ questions_list.append(q20)
 questions_list.append(q21)
 questions_list.append(q22)
 questions_list.append(q23)
+questions_list.append(q24)
+questions_list.append(q25)
+questions_list.append(q26)
+questions_list.append(q27)
+questions_list.append(q28)
+questions_list.append(q29)
  
 
 print questions_list
