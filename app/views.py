@@ -99,7 +99,7 @@ q14["type"] = "input-money"
 q14["placeholder"] = "Samtals vextir ásamt dráttarvöxtum og lántökukostnaði á síðasta ári"
 
 q15 = {}
-q15["question"] =  "Hver er mánaðarleg húsaleiga? Hér skaltu bara skrifa það sem stendur á leigusamningnum, óháð því hvað er innifalið (eins og rafmagn og hiti t.d.)"
+q15["question"] =  "Hver er mánaðarleg húsaleiga þín? Hér skaltu bara skrifa það sem stendur á leigusamningnum, óháð því hvað er innifalið (eins og rafmagn og hiti t.d.)"
 q15["name"] = "rent_payment"
 q15["type"] = "input-money"
 q15["placeholder"] = "Mánaðarleg húsaleiga"
@@ -140,23 +140,55 @@ q21["name"] = "special_rental_benefits"
 q21["type"] = "multiple_choice"
 q21["choices"] = ["Já","Nei"]
 
-q21 = {}
-q21["question"] =  "Býrðu ein(n)?"
-q21["name"] = "lives_alone"
-q21["type"] = "multiple_choice"
-q21["choices"] = ["Já","Nei"]
-
 q22 = {}
-q22["question"] =  "Hefurðu fengið viðurkennt hreyfihömlunarmat?"
+q22["question"] =  "Býrðu ein(n)?"
 q22["name"] = "lives_alone"
 q22["type"] = "multiple_choice"
-q22["choices"] = ["Nei","Já, ég er með bensínstyrk frá TR", "Já, ég fæ uppbót v. reksturs bifreiðar frá TR"]
+q22["choices"] = ["Já","Nei"]
 
 q23 = {}
-q23["question"] =  "Hversu mörg börn áttu sem meðlag fæst greitt með frá TR?"
-q23["name"] = "no_of_children_tr_alimony"
+q23["question"] = "Hver er fjöldi barna á heimilinu?"
+q23["name"] = "num_kids"
 q23["type"] = "input"
-q23["placeholder"] = "Fjöldi barna sem fæst með greitt meðlag frá TR"
+q23["placeholder"] = "Fjöldi barna"
+
+q24 = {}
+q24["question"] = "Þar af fjöldi barna yngri en 7 ára?"
+q24["name"] = "num_kids_under_seven"
+q24["type"] = "input"
+q24["placeholder"] = "Fjöldi barna yngri en 7"
+
+q25 = {}
+q25["question"] =  "Hefurðu fengið viðurkennt hreyfihömlunarmat?"
+q25["name"] = "lives_alone"
+q25["type"] = "multiple_choice"
+q25["choices"] = ["Nei","Já, ég er með bensínstyrk frá TR", "Já, ég fæ uppbót v. reksturs bifreiðar frá TR"]
+
+q26 = {}
+q26["question"] = "Áttu rétt á örorkulífeyri?"
+q26["name"] = "disability_rights"
+q26["type"] = "multiple_choice"
+q26["choices"] = ["Já", "Nei"]
+
+q27 = {}
+q27["question"] = "Hvert er hlutfall örorku í prósentum?"
+q27["name"] = "disability_perc"
+q27["type"] = "input"
+q27["placeholder"] = "Hlutfall örorku"
+
+q28 = {}
+q28["question"] = "Hvað varstu gamall/gömul við fyrsta 75% örorkumat?"
+q28["name"] = "disability_age"
+q28["type"] = "input"
+q28["placeholder"] = "Fyrsta 75% örorkumat"
+
+q29 = {}
+q29["question"] =  "Hversu mörg börn áttu sem meðlag fæst greitt með frá TR?"
+q29["name"] = "no_of_children_tr_alimony"
+q29["type"] = "input"
+q29["placeholder"] = "Fjöldi barna sem fæst með greitt meðlag frá TR"
+
+
 
 
 
