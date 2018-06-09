@@ -38,9 +38,9 @@ q4["placeholder"] = "Mánaðarlegar launatekjur þínar fyrir skatt"
 q4["type"] = "input-money"
 
 q5 = {}
-q5["question"] = "Hverjar eru áætlaðar fjármagnstekjur heimilisins á árinu ef einhverjar?"
+q5["question"] = "Hverjar, ef einhverjar, eru áætlaðar fjármagnstekjur heimilisins á árinu?"
 q5["name"] = "annual_capital_gains_income"
-q5["placeholder"] = "Fjármagnstekjur fyrir árið"
+q5["placeholder"] = "Fjármagnstekjur ársins"
 q5["type"] = "input-money"
 
 q6 = {}
@@ -56,26 +56,26 @@ q7["choices"] = ["0%", "1%", "2%", "3%", "4%"]
 q7["type"] = "multiple_choice"
 
 q8 = {}
-q8["question"] = "Hverjar eru áætlaðar fjármagnstekjur þínar á árinu ef einhverjar?"
+q8["question"] = "Hverjar, ef einhverjar, eru áætlaðar fjármagnstekjur þínar á árinu?"
 q8["name"] = "annual_capital_gains_income"
 q8["placeholder"] = "Fjármagnstekjur þínar fyrir árið"
 q8["type"] = "input-money"
 
 q9 = {}
-q9["question"] = "Hverjar eru mánaðarlegar launatekjur maka þíns?"
+q9["question"] = "Hverjar eru mánaðarlegar launatekjur maka fyrir skatt?"
 q9["name"] = "monthly_pretax_salary_income_mate"
 q9["placeholder"] = "Mánaðarlegar launatekjur maka fyrir skatt"
 q9["type"] = "input-money"
 
 
 q10 = {}
-q10["question"] = "Hversu miklar eignir á heimilið í heild? Þá meina ég samanlagðar eignir hjóna / sambúðarfólks að öllum frádregnum skuldum? Mundu að telja með hlutabréf, innistæður á reikningum og verðbréf."
+q10["question"] = "Hversu miklar eignir á heimilið í heild? Þá meina ég samanlagðar eignir hjóna / sambúðarfólks að frádregnum öllum skuldum? Mundu að telja með hlutabréf, innistæður á reikningum og verðbréf."
 q10["name"] = "total_equity_couple"
 q10["placeholder"] = "Heildareignir heimilisins að frádregnum skuldum"
 q10["type"] = "input-money"
 
 q11 = {}
-q11["question"] = "Hversu miklar eignir áttu í heild? Þá meina ég samanlagðar eignir þínar að öllum frádregnum skuldum? Mundu að telja með hlutabréf, innistæður á reikningum og verðbréf."
+q11["question"] = "Hverjar eru heildareignir þínar? Þá meina ég samanlagðar eignir þínar að frádregnum öllum skuldum? Mundu að telja með hlutabréf, innistæður á reikningum og verðbréf."
 q11["name"] = "total_equity_single"
 q11["placeholder"] = "Heildareignir þínar að frádregnum skuldum"
 q11["type"] = "input-money"
@@ -99,7 +99,7 @@ q14["type"] = "input-money"
 q14["placeholder"] = "Samtals vextir ásamt dráttarvöxtum og lántökukostnaði á síðasta ári"
 
 q15 = {}
-q15["question"] =  "Hversu háa húsaleigu greiðiru á mánuði? Hér skaltu bara skrifa það sem stendur á leigusamningnum, óháð því hvað er innifalið(eins og rafmagn og hiti t.d.)"
+q15["question"] =  "Hver er mánaðarleg húsaleiga? Hér skaltu bara skrifa það sem stendur á leigusamningnum, óháð því hvað er innifalið (eins og rafmagn og hiti t.d.)"
 q15["name"] = "rent_payment"
 q15["type"] = "input-money"
 q15["placeholder"] = "Mánaðarleg húsaleiga"
@@ -123,13 +123,13 @@ q18["type"] = "input-money"
 q18["placeholder"] = "Eignir annarra á heimilinu en þín og maka þíns"
 
 q19 = {}
-q19["question"] =  "Hverjar eru samanlagðar mánaðarlegar skattskyldar tekjur annarra á heimilismanna en þín?"
+q19["question"] =  "Hverjar eru samanlagðar mánaðarlegar skattskyldar tekjur annarra heimilismanna en þín?"
 q19["name"] = "income_other_inhabitants"
 q19["type"] = "input-money"
-q19["placeholder"] = "Skattskyldar mánaðarlegar tekjur annarra á heimilinu en þín og maka þíns"
+q19["placeholder"] = "Skattskyldar mánaðarlegar tekjur annarra á heimilinu en þín"
 
 q20 = {}
-q20["question"] =  "Hverjar eru samanlagðar eignir annarra á heimilismanna en þín?"
+q20["question"] =  "Hverjar eru samanlagðar eignir annarra heimilismanna en þín?"
 q20["name"] = "equity_other_inhabitants_than_mate"
 q20["type"] = "input-money"
 q20["placeholder"] = "Eignir annarra á heimilinu en þín"
