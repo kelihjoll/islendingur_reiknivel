@@ -11,7 +11,7 @@ forsendur_dict = {'utvarpsgjald_threshold_m': 1678001/12,
                  'stadgr_threp_m': 834707,
                  'stadgr_hlutfall_nedra': 0.3694,
                  'stadgr_hlutfall_efra': 0.4624,
-                 'personuafslattur_m': 52907,
+                 'personuafslattur_m': 53895,
                  'hamark_vaxtagjalda_y': [800000, 1000000, 1200000],
                  'hamark_vaxtabota_y': [400000, 500000, 600000],
                  'vaxtab_eignask_nedri': [4500000.0, 4500000.0, 7300000.0],
@@ -956,6 +956,6 @@ def print_dict(person_dict):
     print "Útvarpsgjald: {:,}".format(person_dict['utvarpsgjald'])
     print ""
     print ""
-    print "====NIÐURSTAÐA========"
+    print "=====NIÐURSTAÐA========"
     print "Nettó tekjur í hverjum mánuði: {:,}".format(person_dict['pjeng_i_vasa'])
     print "======================"
