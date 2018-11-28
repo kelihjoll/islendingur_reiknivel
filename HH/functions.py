@@ -184,7 +184,7 @@ def input_bakgrunnsuppl(forsendur):
     # =======================================================
     if hjuskaparstada == 3:
         print "Allar eignir (samanlagðar eignir hjóna) að frádregnum öllum skuldum."
-        print "Með eignum skal telja hlutabréf, innstæður og verðbréf: "
+        print "Með eignum skal telja hlutabréf, innistæður og verðbréf: "
     else:
         print "Allar eignir að frádregnum öllum skuldum. Með eignum skal telja hlutabréf, innstæður og verðbréf: "
     eignir = int(raw_input())
@@ -213,7 +213,7 @@ def input_bakgrunnsuppl(forsendur):
         eftirstodvar = 0
         vaxtagjold = 0
     if husn == 2:
-        husnaediskostnadur = int(raw_input('manadarlegur husnaediskostnadur: '))
+        husnaediskostnadur = int(raw_input('Mánaðarlegur húsnæðiskostnaður: '))
         fjoldi_heimilismanna = int(raw_input("fjoldi heimilismanna ad ther medtoldum: "))
         if fjoldi_heimilismanna > 4:
             fjoldi_heimilismanna = 4
@@ -404,8 +404,9 @@ def husnaedisstudningur_func(forsendur, info, ororka, ellilif):
     elif info['busetuform'] == 2:
         studningur, tekjuskerding, eignaskerding, heimilistekjur = husnaedisbaetur_func(forsendur, info, ororka, ellilif)
         if info['serstakar'] == 1:
-            serstakar = serstakar_func(forsendur, info, ororka, ellilif, studningur)
+            serstakar, tekjuskerding_serstakar = serstakar_func(forsendur, info, ororka, ellilif, studningur)
             studningur += serstakar
+            tekjuskerding += tekjuskerding_serstakar 
         
     else:
         studningur = 0
@@ -538,7 +539,7 @@ def serstakar_func(forsendur, info, ororka, ellilif, studningur):
     if studningur + serstakar > forsendur['serstakar_plus_venjulegar_hamark']:
         serstakar = forsendur['serstakar_plus_venjulegar_hamark'] - studningur
         
-    return serstakar, tekjuskerding
+    return int(serstakar), int(tekjuskerding)
 
 def barnabaetur_func(forsendur, info, ororka, ellilif):
     tekjur_yearly = [info['tekjur'][0]*12, 
@@ -740,7 +741,7 @@ def ororka_func(forsendur, info):
         
     ##### HREYFIHÖMLUNARMAT #####
     if info['hreyfihomlun'] == 1 or info['hreyfihomlun'] == 2:
-        bensinsstyrkur = forsendur['ororka_tekjutr_skerdingarhlutf_efri']
+        bensinsstyrkur = forsendur['ororka_bensinstyrkur_m']
     else:
         bensinsstyrkur = 0
         
