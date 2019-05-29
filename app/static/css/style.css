@@ -6,9 +6,6 @@ label {
     float:left;
 }
 
-.main-container {
-    padding: 20px;
-}
 
 .header-container {
     text-align: center;
@@ -19,23 +16,30 @@ label {
     width:100px;
 }
 
-.results-container {
-    padding-top:20px;
-}
-
-.bot-image-container {
-    border-bottom:1px solid whitesmoke;
-    padding:20px;
-}
-
-.bot-image {
-    display:block;
-    margin:auto;
-}
 
 /*
     Question CSS
  */
+
+
+.results-container {
+    padding:30px;
+}
+
+.graph-container {
+    height:250px;
+    padding:30px;
+}
+
+.row-hidden {
+    /*display:none;*/
+    font-size:12px;
+}
+
+.glyphicon {
+    margin-right: 7px;
+    color:royalblue;
+}
 
 .choice-container{
     padding:10px;
@@ -44,24 +48,6 @@ label {
     border:1px solid whitesmoke;
     overflow:auto;
     cursor: pointer;
-}
-
-.circle-container {
-    width:14%;
-    position: relative;
-    float:left;
-    border-radius:15px;
-
-}
-
-.circle {
-    border: 1px solid rgba(0,0,0,0.1);
-    width: 30px;
-    height: 30px;
-    position: absolute;
-    top: 4px;
-    left: 0%;
-    border-radius: 50%;
 }
 
 

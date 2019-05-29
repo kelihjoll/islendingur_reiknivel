@@ -1,0 +1,27 @@
+☐ Tekjuskattur
+    ☐ Hvada input tharf?
+        ☐ Laun
+        ☐ Sereignarsparnadur -> 0% default, 2% og 4% sem val
+        ☐ Default 100% personuafslattur
+        ☐ Seinna:
+            ☐ Skattkort maka
+☐ Husnaedisbaetur
+    ☐ Form busetu
+        ☐ Leiga
+            ☐ Hvad bua margir a heimilinu ad ther medtoldum?
+        ☐ Eign
+            ☐ Hjuskaparstada?
+                ☐ Einhleypur ( barnlaus )
+                ☐ Einstaett foreldri
+                ☐ Sambud / hjon
+            ☐ Vaxtakostnadur a ari af fasteigninni
+        ☐ Badu megin
+            ☐ Hverjar eru samanlagdar tekjur heimilismanna?
+☐ Barnabaetur
+    ☐ Fjoldi barna 
+        ☐ Born undir 7 ara aldri
+    ☐ Tekjur (sja ad ofan)
+    ☐ Hjuskaparstada (sja ad ofan)
+        ☐ Hvernig skiptast barnabaetur?
+        ☐ Byrja a thvi ad reikna sem 100% fyrir notandann
+    

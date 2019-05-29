@@ -1,141 +1,45 @@
 {% extends "layout.html" %}
 {% block body %}
 {% include "nav.html" %}
-<div class="main-container container">
-    <div class="header-container">
-      <h4>Hellú</h4>
-    </div>
-    <div class="bot-container">
-      <div class="button-container">
-        <a href='/questions' class="btn btn-lg btn-info btn-block">Hefja spjall við Hr. JeNKiNz</a>
-      </div>
-    </div>
-
-<!--     <div class="row">
-
-        <table class="table">
-          <tr>
-            <td><label>Hverjar eru launatekjur þínar fyrir skatta?</label></td>
-            <td><label>Hverjar eru fjármagnstekjur þínar fyrir skatta?</label></td>
-            <td><label>Hversu hátt hlutfall launa greiðiru í lífeyrissjóð?</label></td>
-            <td><label>Hversu hátt hlutfall launa greiðiru í séreignarsparnað?</label></td>
-            <td><label>Hverjar eru heildar mánaðartekjur heimilisins?</label></td>
-            <td><label>Hverjar eru eignir heimilisins að frádregnum skuldum?</label></td>
-          </tr>
-          <tr>
-            <td><input type="text" class="form-control form-block" value="0"></td>
-            <td><input type="text" class="form-control form-block" value="0"></td>
-  
-            <td>
-                <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  0%
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">0%</a></li>
-                  <li><a href="#">2%</a></li>
-                  <li><a href="#">4%</a></li>
-                </ul>
-              </div>
-            </td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  0%
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">0%</a></li>
-                  <li><a href="#">1%</a></li>
-                  <li><a href="#">2%</a></li>
-                  <li><a href="#">3%</a></li>
-                  <li><a href="#">4%</a></li>
-                </ul>
-              </div>
-            </td>
-
-            <td><input type="text" class="form-control form-block" value="0"></td>
-            <td><input type="text" class="form-control form-block" value="0"></td>
-            <td>
-                
-            </td>
-            <td>
-              
-            </td>
-          </tr>
-          <tr>
-            <td><label>Hver er hjúskaparstaða þín?</label></td>
-            <td><label>Hvað eru margir á heimilinu að þér meðtöldum/meðtaldri?</label></td>
-            <td><label>Hvað eru mörg börn á heimilinu?</label></td>
-            <td><label>Hversu mörg þeirra eru yngri en 7 ára?</label></td>
-            <td><label>Hver er mánaðarlegur húsnæðiskostnaður heimilisins?</label></td>
-          </tr>
-          <tr>
-            <td>
-              
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  Einhleyp(ur)
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">Einhleyp(ur)</a></li>
-                  <li><a href="#">Einstætt foreldri</a></li>
-                  <li><a href="#">Gift(ur) / er í sambúð</a></li>
-                </ul>
-              </div>
-
-            </td>
-            <td>
-              <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle btn-block" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                  1
-                  <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                  <li><a href="#">1</a></li>
-                  <li><a href="#">2</a></li>
-                  <li><a href="#">3</a></li>
-                  <li><a href="#">4 eða fleiri</a></li>
-                </ul>
-              </div>
-            </td>
-            <td><input type="text" class="form-control form-block" value="0"></td>
-            <td><input type="text" class="form-control form-block" value="0"></td>
-            <td><input type="text" class="form-control form-block" value="0"></td>
-          </tr>
-        </table>
-      </div> -->
-    
-
-    <!-- </div> -->
-    <!-- <div class="row results-container">
+<div class="main-container container row">
+     
+    <div class="row results-container col-md-6">
         <h4>Niðurstöður</h4>
-        <table class="table">
+        <table class="table table-results">
             <thead>
               <tr>
-                <th>Liður</th>
+                <th>Liður</th><th></th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>Laun</td>
+                <td><span class='glyphicon glyphicon-triangle-right' aria-hidden="true"></span>Laun</td>
+                <td>
+                  <div class="row">
+                    <div class="col-md-6 offset-md-6"><input type="text" name="monthly_pretax_salary_income" class="form-control form-block format-money" value="0"></div>
+                  </div>
+              </td>
+              </tr>
+              <tr class="row-hidden"><td>Framlag í lífeyrissparnað</td><td>4%</td></tr>
+              <tr>
+                <td><span class='glyphicon glyphicon-triangle-right' aria-hidden="true"></span>Húsnæðisstuðningur</td>
               </tr>
               <tr>
-                <td>Húsnæðisstuðningur</td>
+                <td><span class='glyphicon glyphicon-triangle-right' aria-hidden="true"></span>Barnabætur</td>
               </tr>
               <tr>
-                <td>Barnabætur</td>
-              </tr>
-              <tr>
-                <td>Vaxtabætur</td>
+                <td><span class='glyphicon glyphicon-triangle-right' aria-hidden="true"></span>Vaxtabætur</td>
               </tr>
             </tbody>
         </table>
-    </div> -->
+    </div>
+
+    <div class="graph-container col-md-6">
+      <div id="graph-container"></div>   
+    </div>
+
 </div>
 {% endblock %}
 {% block url_specific_scripts %}
-<script type='text/javascript' src='/javascripts/index.js'></script>
+<script type='text/javascript' src='{{ url_for('static', filename='javascripts/index.js') }}'></script>
 {% endblock %}
