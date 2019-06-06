@@ -214,9 +214,6 @@ class Question(object):
         self.placeholder = question["placeholder"] if hasattr(question, "placeholder") else None
         self.choices = question["choices"] if hasattr(question, "choices") else None
 
-    def print(self):
-        return self.name
-
     def get_name(self):
         return self.name
 

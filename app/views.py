@@ -3,6 +3,7 @@
 
 from flask import render_template, request
 from app import app
+import json
 from .questions import Questions
 
 q = Questions()
@@ -13,9 +14,21 @@ app.jinja_env.globals.update(print_question_by_name=q.print_question_by_name)
 def index():
     return render_template("index.html")
 
-@app.route('/questions')
+@app.route('/calculate', methods=['POST'])
 def render_question():
-    return render_template("question.html")
+    form = request.form.to_dict()
+    
+    print(form)
+
+    # need the calculate method to return data in this form
+    return json.dumps({
+        "status":"ok",
+        "data": [70000, 140000, 190000, 250000, 270000, 310000, 380000, 450000]
+    })
+
+# @app.route('/questions')
+# def render_question():
+#     return render_template("question.html")
 
 
 @app.route("/get_template", methods=["GET"])
