@@ -34,13 +34,13 @@ results = {'tekjur_e_skatt': 0,
            'husnaedisstudningur_eignaskerding' : 0,
           }
 
-def litill_islendingur():
+def litill_islendingur(bakgrunnsuppl):
     if bakgrunnsuppl['tekjur'] != 0:
         results['tekjur_e_skatt'], 
         results['stadgreidsla'], 
         results['lifeyrisgreidsla'], 
         results['sereignarlifeyrisgreidsla'] = \
-        stadgreidsla_func()
+        stadgreidsla_func(bakgrunnsuppl)
         #print 'tekjur fyrir skatt: %d' %bakgrunnsuppl['tekjur'][0]
         #print 'tekjur eftir skatt: %d' %tekjur_e_skatt
         #print 'staðgreiðsla: %d' %stadgreidsla
@@ -48,20 +48,20 @@ def litill_islendingur():
         #print 'greiðsla í viðbótarlífeyrissparnað: %d' %sereignarlifeyrisgr
         
     if bakgrunnsuppl['fjoldi_barna'] != 0 and bakgrunnsuppl['hjuskaparstada'] != 1:
-        results['barnabaetur'] = barnabaetur_func()
+        results['barnabaetur'] = barnabaetur_func(bakgrunnsuppl)
         #print 'barnabætur: %d' %barnabaetur
         
     if bakgrunnsuppl['busetuform'] != 3:
         results['husnaedisstudningur'], 
         results['husnaedisstudningur_tekjuskerding'], 
-        results['husnaedisstudningur_eignaskerding'] = husnaedisstudningur_func()
+        results['husnaedisstudningur_eignaskerding'] = husnaedisstudningur_func(bakgrunnsuppl)
         #print 'húsnæðisstuðningur: %d' %studningur
         #print 'tekjuskerðing húsnæðisstuðnings: %d' %tekjuskerding
         #print 'eignaskerðing húsnæðisstuðnings: %d' %eignaskerding
         
     return results
      
-def stadgreidsla_func():
+def stadgreidsla_func(bakgrunnsuppl):
     
     '''
     Reiknar staðgreiðslu útfrá gefnum forsendum.
@@ -99,7 +99,7 @@ def stadgreidsla_func():
 
     return laun_e_skatt, stadgreidsla_alls, lifeyrir, serlifeyrir
 
-def barnabaetur_func():#, ororka, ellilif):
+def barnabaetur_func(bakgrunnsuppl):#, ororka, ellilif):
     '''
     Reiknar barnabætur út frá gefnum forsendum
 
@@ -175,7 +175,7 @@ def barnabaetur_func():#, ororka, ellilif):
     else:
         return baetur/24 #bætur deilast jafnt milli hjóna
 
-def husnaedisstudningur_func():#, ororka, ellilif):
+def husnaedisstudningur_func(bakgrunnsuppl):#, ororka, ellilif):
     ''' Kallar á rétt húsnæðisstuðningsfall eftir búsetuformi í forsendum '''
 
     if bakgrunnsuppl['busetuform'] == 1:
@@ -193,7 +193,7 @@ def husnaedisstudningur_func():#, ororka, ellilif):
 
     return studningur, tekjuskerding, eignaskerding
 
-def vaxtabaetur_func():#, ororka, ellilif):
+def vaxtabaetur_func(bakgrunnsuppl):#, ororka, ellilif):
     '''
     Reiknar vaxtabætur út frá gefnum forsendum.
 
@@ -259,7 +259,7 @@ def vaxtabaetur_func():#, ororka, ellilif):
 
     return baetur, tekjuskerding, eignaskerding
 
-def husnaedisbaetur_func():#ororka, ellilif):
+def husnaedisbaetur_func(bakgrunnsuppl):#ororka, ellilif):
     '''
     Reiknar húsnæðisbætur (húsaleigubætur) út frá gefnum forsendum
 
