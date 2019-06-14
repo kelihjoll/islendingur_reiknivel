@@ -3,7 +3,7 @@
 {% include "nav.html" %}
 <div class="main-container container row">
      
-    <div class="row results-container col-md-6">
+    <div class="row results-container col-md-5">
         <table class="table table-results borderless">
             <thead>
               <tr>
@@ -21,6 +21,19 @@
               </tr>
               <tr class="row-hidden">
                 <td>Framlag í lífeyrissparnað</td>
+                <td>
+                  <div class="dropdown">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" name="lifeyrissjodur_framlag" type="button" data-toggle="dropdown">2% <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">0%</a></li>
+                      <li><a href="#">2%</a></li>
+                      <li><a href="#">4%</a></li>
+                    </ul>
+                  </div>
+                </td>
+              </tr>
+              <tr class="row-hidden">
+                <td>Framlag í séreignasparnað</td>
                 <td>
                   <div class="dropdown">
                     <button class="btn btn-primary btn-sm dropdown-toggle" name="lifeyrissjodur_framlag" type="button" data-toggle="dropdown">2% <span class="caret"></span></button>
@@ -83,7 +96,7 @@
         </table>
     </div>
 
-    <div class="graph-container col-md-6">
+    <div class="graph-container col-md-7">
       <div id="graph-container"></div>   
     </div>
 

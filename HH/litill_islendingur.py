@@ -179,10 +179,10 @@ def husnaedisstudningur_func(bakgrunnsuppl):#, ororka, ellilif):
     ''' Kallar á rétt húsnæðisstuðningsfall eftir búsetuformi í forsendum '''
 
     if bakgrunnsuppl['busetuform'] == 1:
-        studningur, tekjuskerding, eignaskerding = vaxtabaetur_func()#, ororka, ellilif)
+        studningur, tekjuskerding, eignaskerding = vaxtabaetur_func(bakgrunnsuppl)#, ororka, ellilif)
 
     elif bakgrunnsuppl['busetuform'] == 2:
-        studningur, tekjuskerding, eignaskerding, heimilistekjur = husnaedisbaetur_func()#, ororka, ellilif)
+        studningur, tekjuskerding, eignaskerding, heimilistekjur = husnaedisbaetur_func(bakgrunnsuppl)#, ororka, ellilif)
         if bakgrunnsuppl['serstakar'] == 1:
             serstakar, tekjuskerding_serstakar = serstakar_func(studningur) #ororka, ellilif, studningur)
             studningur += serstakar

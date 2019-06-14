@@ -15,16 +15,37 @@ Number.prototype.formatMoney = function(places, symbol, thousand, decimal) {
     return symbol + negative + (j ? i.substr(0, j) + thousand : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + thousand) + (places ? decimal + Math.abs(number - i).toFixed(places).slice(2) : "");
 };
 
+let launabil = [300000, 400000, 500000, 600000, 700000, 800000, 900000, 1000000]
+
 chart = new Highcharts.chart('graph-container', {
 
     title: {
-        text: 'Heildartekjuþróun miðað við gefnar forsendur'
+        text: 'Þróun ráðstöfunartekna miðað við gefnar forsendur'
     },
 
 
     yAxis: {
         title: {
-            text: 'Laun í krónum á mánuði'
+            text: 'Ráðstöfunartekjur í krónum á mánuði'
+        },
+        labels: {
+            enabled: true,
+            formatter: function () { return this.value.formatMoney(0,"",".") }
+        }
+    },
+
+    xAxis: {
+        tickInterval: 1,
+        labels: {
+            enabled: true,
+            formatter: function() { return launabil[this.value].formatMoney(0,"",".") }
+        }
+    },
+
+    tooltip: {
+        useHTML: true,
+        formatter: function(){
+            return "<p>Ráðstöfunartekjur þínar miðað við "+launabil[this.x].formatMoney(0,"",".")+" í laun fyrir skatt yrðu "+this.y.formatMoney(0,"",".")+" krónur á mánuði</p>"
         }
     },
 
@@ -38,7 +59,7 @@ chart = new Highcharts.chart('graph-container', {
     },
 
     series: [{
-        name: 'Laun',
+        name: 'Laun fyrir skatt í krónum á mánuði',
         data: [50000, 120000, 170000, 220000, 200000, 250000, 320000, 380000]
     }],
 
@@ -89,15 +110,29 @@ var Reiknivel = (function(){
     }
 
     var reRenderGraph = function(data){
-        chart.series[0].setData(data["data"],true)
+        chart.series[0].setData(data["radstofunartekjur"],true)
+    }
+
+    var validateForm = function(data){
+        let form_valid = false
+        if (data['monthly_pretax_salary_income'] > 0){
+            form_valid = true
+        }
+        return form_valid
     }
     
     var calculateFormAndRenderGraph = function(){
         var data = getData()
-        calulateFormFromData(data).then(function(data){
-            data = JSON.parse(data)
-            reRenderGraph(data)
-        })
+        if(validateForm(data)){
+
+            calulateFormFromData(data).then(function(data){
+                data = JSON.parse(data)
+                console.log(data)
+                reRenderGraph(data)
+            })
+        } else {
+            console.log("data is missing in form")
+        }
     }
     
     return {
@@ -116,7 +151,7 @@ $(document).on("keyup", ".format-money", function(e){
     }
 });
 
-$('.format-money').keyup(_.debounce(function(){
+$('.format-money').keyup(_.debounce(function(e){
     output = Reiknivel.calculateFormAndRenderGraph()
 } , 1000));
 
