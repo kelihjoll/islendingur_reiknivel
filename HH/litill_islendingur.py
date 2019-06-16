@@ -29,35 +29,30 @@ results = {'tekjur_e_skatt': 0,
            'lifeyrisgreidsla' : 0,
            'sereignarlifeyrisgreidsla' : 0,
            'barnabaetur': 0,
+           'barnabaetur_skerding': 0,
            'husnaedisstudningur' : 0,
            'husnaedisstudningur_tekjuskerding' : 0,
            'husnaedisstudningur_eignaskerding' : 0,
+           'radstofunartekjur': 0
           }
 
 def litill_islendingur(bakgrunnsuppl):
     if bakgrunnsuppl['tekjur'] != 0:
-        results['tekjur_e_skatt'], 
-        results['stadgreidsla'], 
-        results['lifeyrisgreidsla'], 
+        results['tekjur_e_skatt'], \
+        results['stadgreidsla'], \
+        results['lifeyrisgreidsla'], \
         results['sereignarlifeyrisgreidsla'] = \
         stadgreidsla_func(bakgrunnsuppl)
-        #print 'tekjur fyrir skatt: %d' %bakgrunnsuppl['tekjur'][0]
-        #print 'tekjur eftir skatt: %d' %tekjur_e_skatt
-        #print 'staðgreiðsla: %d' %stadgreidsla
-        #print 'greiðsla í lífeyrissjóð: %d' %lifeyrisgreidsla
-        #print 'greiðsla í viðbótarlífeyrissparnað: %d' %sereignarlifeyrisgr
         
     if bakgrunnsuppl['fjoldi_barna'] != 0 and bakgrunnsuppl['hjuskaparstada'] != 1:
-        results['barnabaetur'] = barnabaetur_func(bakgrunnsuppl)
-        #print 'barnabætur: %d' %barnabaetur
+        results['barnabaetur'], results['barnabaetur_skerding'] = barnabaetur_func(bakgrunnsuppl)
         
     if bakgrunnsuppl['busetuform'] != 3:
-        results['husnaedisstudningur'], 
-        results['husnaedisstudningur_tekjuskerding'], 
+        results['husnaedisstudningur'], \
+        results['husnaedisstudningur_tekjuskerding'], \
         results['husnaedisstudningur_eignaskerding'] = husnaedisstudningur_func(bakgrunnsuppl)
-        #print 'húsnæðisstuðningur: %d' %studningur
-        #print 'tekjuskerðing húsnæðisstuðnings: %d' %tekjuskerding
-        #print 'eignaskerðing húsnæðisstuðnings: %d' %eignaskerding
+    
+    results['radstofunartekjur'] = results['tekjur_e_skatt'] + results['barnabaetur'] + results['husnaedisstudningur']
         
     return results
      
@@ -169,11 +164,13 @@ def barnabaetur_func(bakgrunnsuppl):#, ororka, ellilif):
     baetur = almennar_barnabaetur + vidbotarbaetur - (skerding + umframskerding + skerding_vidbotar)
     if baetur < 0:
         baetur = 0
+       
+    skerding += umframskerding + skerding_vidbotar
     
     if bakgrunnsuppl['hjuskaparstada'] == 2:
-        return baetur/12
+        return baetur/12, skerding
     else:
-        return baetur/24 #bætur deilast jafnt milli hjóna
+        return baetur/24, skerding #bætur deilast jafnt milli hjóna
 
 def husnaedisstudningur_func(bakgrunnsuppl):#, ororka, ellilif):
     ''' Kallar á rétt húsnæðisstuðningsfall eftir búsetuformi í forsendum '''
