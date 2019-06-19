@@ -46,11 +46,17 @@ def litill_islendingur(bakgrunnsuppl):
         
     if bakgrunnsuppl['fjoldi_barna'] != 0 and bakgrunnsuppl['hjuskaparstada'] != 1:
         results['barnabaetur'], results['barnabaetur_skerding'] = barnabaetur_func(bakgrunnsuppl)
+    else:
+        results['barnabaetur'], results['barnabaetur_skerding'] = 0
         
     if bakgrunnsuppl['busetuform'] != 3:
         results['husnaedisstudningur'], \
         results['husnaedisstudningur_tekjuskerding'], \
         results['husnaedisstudningur_eignaskerding'] = husnaedisstudningur_func(bakgrunnsuppl)
+    else:
+        results['husnaedisstudningur'], \
+        results['husnaedisstudningur_tekjuskerding'], \
+        results['husnaedisstudningur_eignaskerding'] = 0
     
     results['radstofunartekjur'] = results['tekjur_e_skatt'] + results['barnabaetur'] + results['husnaedisstudningur']
         
